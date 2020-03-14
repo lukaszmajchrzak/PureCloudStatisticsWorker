@@ -12,7 +12,7 @@ public class QuartzScheduler {
                     .newTrigger()
                     .withIdentity("ReadCSVJob", "group1")
                     .withSchedule(
-                            CronScheduleBuilder.cronSchedule("0 0/10 * 1/1 * ? *"))
+                            CronScheduleBuilder.cronSchedule("0 0/15 * 1/1 * ? *"))
                     .build();
 
             //schedule it
@@ -34,7 +34,7 @@ public class QuartzScheduler {
                     .newTrigger()
                     .withIdentity("RunCSVgenJob", "group1")
                     .withSchedule(
-                            CronScheduleBuilder.cronSchedule("0 0/6 * 1/1 * ? *"))
+                            CronScheduleBuilder.cronSchedule("0 0/15 * 1/1 * ? *"))
                     .build();
 
             //schedule it
@@ -54,7 +54,7 @@ public class QuartzScheduler {
                     .newTrigger()
                     .withIdentity("PyJob", "group1")
                     .withSchedule(
-                            CronScheduleBuilder.cronSchedule("0 0/5 * 1/1 * ? *"))
+                            CronScheduleBuilder.cronSchedule("0 0 0/1 1/1 * ? *"))
                     .build();
 
             //schedule it
