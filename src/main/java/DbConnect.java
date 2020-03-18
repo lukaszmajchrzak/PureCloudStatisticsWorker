@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DbConnect {
     protected Connection con;
@@ -34,7 +35,22 @@ public class DbConnect {
         AddUsers();
         return new ArrayList<>(this.users);
     }
-
+    public HashMap<String,String> readResources(String reportType, HashMap<String,String> resources) {
+        try {
+            Statement stmt = this.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PureCloud.Resources");
+            while (rs.next()) {
+                if (rs.getString(1).equals(reportType)) {
+                    if (resources.containsKey(rs.getString(2))) {
+                        resources.replace(rs.getString(2), rs.getString(1));
+                    }
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return resources;
+    }
     public String getTableName(String username){
         AddUsers();
             for(int i=0;i<users.size();i++){
