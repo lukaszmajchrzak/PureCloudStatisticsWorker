@@ -1,5 +1,5 @@
 Create table Resources (
     ReportType Varchar(255),
-    Variable Varchar(255),
+    ScriptName Varchar(255),
     Path Varchar(255)
 );

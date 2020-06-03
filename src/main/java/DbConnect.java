@@ -1,22 +1,30 @@
+import java.nio.file.FileSystems;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DbConnect {
     protected Connection con;
+    private ConnectionReader connectionReader = new ConnectionReader();
     private ArrayList<User> users = new ArrayList<>();
+
+
 
     /**
      * <p> Method connects to database using connection string typed in connectionString.xml file
      * <p>
      * to read the file method runs</p>
      */
+
     public void connect() {
         try {
-//            this.con = DriverManager.getConnection(conReader.getAddress(), conReader.getUsername(), conReader.getPassword());
-              this.con =DriverManager.getConnection("jdbc:mysql://10.13.135.10:3306/db", "LukMaj", "LukMaj123$%^");
+            connectionReader.setFilePath(FileSystems.getDefault().getPath("C:\\Users\\lukmaj\\Desktop\\dbConnect.xml"));
+            String connectionString = connectionReader.getConnectionURL();
+            String username = connectionReader.getUsername();
+            String password = connectionReader.getPassword();
+            this.con = DriverManager.getConnection(connectionString,username,password);
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
     }
     private void AddUsers(){
